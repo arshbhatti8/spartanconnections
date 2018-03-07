@@ -6,7 +6,7 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        Welcome to Spartan Connections and this is a pull request test
+        Welcome to Spartan Connections. This is another iteration of this project.And now I'm in test branch.
       </div>
     );
   }
