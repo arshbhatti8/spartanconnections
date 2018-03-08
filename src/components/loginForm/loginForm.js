@@ -1,29 +1,33 @@
 import React,{Component} from 'react'
-import { Button, Form, Grid, Header, Image, Message, Segment } from 'semantic-ui-react'
+import { Button, Form, Grid, Header, Image, Message, Segment } from 'semantic-ui-react';
 
 class LoginForm extends Component {
-    state={
-      showForm:"false",
-      showLoading:"true"
-    };
+    constructor(){
+        super();
+        this.state={
+            showForm:false,
+            showLoading:true
+        };
+        console.log("constructor running");
+    }
 
     componentDidMount(){
-        const doesShow=this.state.showForm;
-        const doesShow2=this.state.showLoading;
+        const showFormState=this.state.showForm;
+        const showLoadingState=this.state.showLoading;
 
         let handleTimeout=()=> {
-            this.setState({showForm:!doesShow});
-            this.setState({showLoading: !doesShow2});
+
+            this.setState({showForm:!showFormState,showLoading:!showLoadingState});
 
         };
 
         setTimeout(handleTimeout,2000);
-
+        console.log("componentDidMount");
     }
 
     render() {
 
-             let displayForm=null;
+             let displayForm;
 
             if(this.state.showForm) {
                 displayForm =
@@ -116,8 +120,12 @@ class LoginForm extends Component {
                     </Grid.Column>
                 </Grid.Row>
             </Grid>
+            {console.log("End of parsing")}
+
         </div>
-        );
+
+        )
+
     }
 }
 export default LoginForm;

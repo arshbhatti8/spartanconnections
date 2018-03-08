@@ -8,10 +8,11 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <LandingPage/>
+          <LandingPage/>
       </div>
-    );
+    )
   }
+
 }
 
 export default App;
