@@ -1,15 +1,13 @@
 import React , {Component} from 'react';
-import LoginForm from '../loginForm/loginForm';
+import LoginModal from '../loginModal/loginModal';
 import './landingpage.css';
 class landingPage extends Component {
 
     render() {
-        const style={
 
-        };
         return (
-        <div>
-                <LoginForm/>
+        <div id='background' >
+            <LoginModal />
         </div>
         )
 
