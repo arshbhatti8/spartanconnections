@@ -1,15 +1,51 @@
-#background{
-    background-image: url("../../assets/images/background.jpg");
-    /* Full height */
-    height: 100% ;
 
-    width: 100%;
-    /* Center and scale the image nicely */
+#login{
+    position:absolute;
+    left:44%;
+    top:50%;
+    transform: translate(-50%,-50%);
+    z-index: 0;
 
-    background-position: center center;
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-attachment: fixed;
+}
 
+#signup{
+    position:absolute;
+    left:56%;
+    top:50%;
+    transform: translate(-50%,-50%);
+    z-index: 0;
+}
 
+#or{
+    position:absolute;
+    left:50%;
+    top: 49.5%;
+    transform: translate(-50%,-50%);
+    z-index: 0;
+    color:white;
+    font-size: 2.5vw;
+    font-weight: bold;
+
+}
+
+#message
+{
+    position:absolute;
+    z-index: 6;
+    left:50%;
+    top: 50%;
+    transform: translate(-50%,-50%);
+
+}
+
+#signupModal
+{
+    position:absolute;
+    z-index: 5;
+}
+
+#loginModal
+{
+    position:absolute;
+    z-index: 5;
 }
