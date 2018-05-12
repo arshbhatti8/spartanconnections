@@ -1,5 +1,5 @@
 import React,{Component} from 'react'
-import {Header,Form,Segment,Button,Icon,Radio} from 'semantic-ui-react';
+import {Header,Form,Segment,Button,Icon} from 'semantic-ui-react';
 import PostData from '../services/postSignup'
 import './signupModal.css';
 
@@ -7,43 +7,33 @@ class SignupModal extends Component {
     constructor(props){
         super(props);
         this.state={
-            'id':'',
-            'passwd':'',
-            'name':'',
-            'level':'',
-            'birthday':'',
-            'description':''
+            name:'',
+            dob:'',
+            email:'',
+            password:'',
         }
     }
 
     signupSubmit=()=> {
-        if (this.state.id &&
-            this.state.passwd &&
-            this.state.name &&
-            this.state.level &&
-            this.state.birthday &&
-            this.state.description) {
+        if (this.state.name && this.state.email && this.state.password && this.state.dob) {
+            console.log(this.state);
+            PostData(this.state).then((result) => {
+                console.log(result);
+                //clearing state to return to landing page
+                this.props.clearState();
+                this.props.successfulSignUp();
+            })
+                .catch((error) => {
+                    this.props.signupFail();
+                    return error;
+                });
 
-            PostData(this.state);
-            this.props.clearState();
-            this.props.successfulSignUp();
-        //     PostData(this.state).then((result)=>{
-        //         let responseJSON= result;
-        //         console.log(responseJSON);
-        //         //clearing state to return to landing page
-        //         this.props.clearState();
-        //         this.props.successfulSignUp();
-        //
-        //     });
-         }
+        }
     };
 
     onChange=(e)=>{
         this.setState({[e.target.name]:e.target.value});
-        console.log(this.state);
     };
-
-    changeType=(e, { value}) => this.setState({...this.state,level:value });
 
     render() {
         return(
@@ -69,10 +59,18 @@ class SignupModal extends Component {
                         />
                         <Form.Input
                             fluid
+                            icon='birthday'
+                            iconPosition='left'
+                            placeholder='Enter your date of birth (MM/DD/YEAR)'
+                            name='dob'
+                            onChange={this.onChange}
+                        />
+                        <Form.Input
+                            fluid
                             icon='at'
                             iconPosition='left'
-                            placeholder='Enter the User ID you wish to have'
-                            name='id'
+                            placeholder='Enter the your email address'
+                            name='email'
                             onChange={this.onChange}
                         />
                         <Form.Input
@@ -80,48 +78,10 @@ class SignupModal extends Component {
                             icon='lock'
                             iconPosition='left'
                             placeholder='Enter the Password you desire'
-                            name='passwd'
+                            name='password'
                             type='password'
                             onChange={this.onChange}
                         />
-                        <Form.Input
-                            fluid
-                            icon='birthday'
-                            iconPosition='left'
-                            placeholder='Enter your Birthday here (MM/DD/YY)'
-                            name='birthday'
-                            onChange={this.onChange}
-                        />
-                        <Form.TextArea
-                            label='About'
-                            name='description'
-                            placeholder='Tell us more about you...'
-                            onChange={this.onChange}/>
-                        <Form.Field>
-                            Pick User Level:
-                            <br/>
-                            <Radio
-                            label='Admin'
-                            value='1'
-                            onChange={this.changeType}
-                            checked={this.state.level === '1'}/>
-                        </Form.Field>
-                        <br/>
-                        <Form.Field>
-                            <Radio
-                            label='Doctor'
-                            value='2'
-                            onChange={this.changeType}
-                            checked={this.state.level === '2'}/>
-                        </Form.Field>
-                        <br/>
-                        <Form.Field><Radio
-                            label='Patient'
-                            value='3'
-                            onChange={this.changeType}
-                            checked={this.state.level === '3'}/>
-                        </Form.Field>
-
                         <Button
                             onClick={this.signupSubmit}
                             color='teal'

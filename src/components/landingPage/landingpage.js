@@ -9,11 +9,14 @@ import './landingpage.css';
 class landingPage extends Component {
     constructor(props){
         super(props);
+
         this.state={
             loginActive:false,
             signupActive:false,
             renderSuccessMessage:false,
-            loginRedirect:false
+            loginRedirect:false,
+            failedLogin:false,
+            failedSignup:false
         };
     }
 
@@ -35,29 +38,46 @@ class landingPage extends Component {
     };
 
     clearState=()=>{
-        console.log("clearing state");
         this.setState({
             loginActive:false,
             signupActive:false})
     };
 
     successfulSignup=()=>{
-        console.log("Rendering success message");
         this.setState({renderSuccessMessage:true});
+    };
+
+    failedLogin=()=>{
+        this.setState({failedLogin:true});
+        this.setState({loginActive:false});
+    };
+    failedSignup=()=>{
+        this.setState({failedSignup:true});
+        this.setState({signupActive:false});
     };
 
     handleDismiss=()=>{
         this.setState({renderSuccessMessage:false});
     };
+
+    handleLoginDismiss=()=>{
+      this.setState({failedLogin:false});
+    };
+
+    handleSignupDismiss=()=>{
+        this.setState({failedSignup:false});
+    };
+
+
     render() {
         //render LoginModal if Login button pressed
         let renderOutput=null;
         if(this.state.loginActive){
-            renderOutput=<LoginModal id='loginModal' clearState={this.clearState} setLoginRedirect={this.setLoginRedirect}/>
+            renderOutput=<LoginModal id='loginModal' clearState={this.clearState} setLoginRedirect={this.setLoginRedirect} loginFail={this.failedLogin}/>
         }
         //render LoginModal if SignUp button pressed
         if(this.state.signupActive){
-            renderOutput=<SignupModal id='signupModal' clearState={this.clearState} successfulSignUp={this.successfulSignup}/>
+            renderOutput=<SignupModal id='signupModal' clearState={this.clearState} successfulSignUp={this.successfulSignup} signupFail={this.failedSignup}/>
         }
         //render Success Message if signup successful
         let renderSuccessMessage=  null;
@@ -71,6 +91,33 @@ class landingPage extends Component {
                 header='Your user registration was successful'
                 content='You may now log-in with the username you have chosen'/>
         }
+
+        //unsuccessful Login message display
+        let renderFailedLoginMessage=null;
+
+        if(this.state.failedLogin){
+            renderFailedLoginMessage= <Message
+                id='message'
+                onDismiss={this.handleLoginDismiss}
+                size='massive'
+                negative
+                header='Login Failed'
+                content='Login Failed because of some reason'/>
+        }
+
+        //unsuccessful Signup message display
+        let renderFailedSignupMessage=null;
+
+        if(this.state.failedSignup){
+            renderFailedSignupMessage= <Message
+                id='message'
+                onDismiss={this.handleSignupDismiss}
+                size='massive'
+                negative
+                header='Login Failed'
+                content='Login Failed because of some reason'/>
+        }
+
         if(this.state.loginRedirect){
             return(<Redirect to={'/home'}/>)
         }
@@ -79,12 +126,14 @@ class landingPage extends Component {
         <div id='background' >
             <video style={{height: 'auto', width:'100%', top: 0, padding: 0}}
                    className="videoTag"
+                   muted
                    autoPlay
-                   loop
-                   muted>
+                   loop>
                 <source src={require('../../assets/video/backgroundVideo.mp4')} type='video/mp4'/>
             </video>
             {renderSuccessMessage}
+            {renderFailedLoginMessage}
+            {renderFailedSignupMessage}
             <Button
                 id='login'
                 color='teal'

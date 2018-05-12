@@ -8,24 +8,24 @@ class LoginModal extends Component {
     constructor(props){
         super(props);
         this.state={
-            'id':'',
-            'passwd':'',
+            email:'',
+            password:'',
         }
     }
 
     login =()=>{
-        if(this.state.id && this.state.passwd){
-            PostData(this.state);
-            this.props.clearState();
-            this.props.setLoginRedirect();
+        if(this.state.email && this.state.password){
+            PostData(this.state).then((result)=>{
+                console.log("Result data:"+result.data);
+                //clearing state to return to landing page
+                this.props.clearState();
+                this.props.setLoginRedirect();
+            })
+                .catch((error)=>{
+                    this.props.loginFail();
+                    return error;
+                });
 
-            // PostData(this.state).then((result)=>{
-            //     console.log(result);
-            //     //clearing state to return to landing page
-            //     this.props.clearState();
-            //     this.setState({redirect:true});
-            //     this.props.setLoginRedirect();
-            // });
         }
     };
 
@@ -52,15 +52,15 @@ class LoginModal extends Component {
                                 fluid
                                 icon='user'
                                 iconPosition='left'
-                                name='id'
-                                placeholder='Enter your ID here'
+                                name='email'
+                                placeholder='Enter your email here'
                                 onChange={this.onChange}
                             />
                             <Form.Input
                                 fluid
                                 icon='lock'
                                 iconPosition='left'
-                                name='passwd'
+                                name='password'
                                 placeholder='Enter your password'
                                 type='password'
                                 onChange={this.onChange}
