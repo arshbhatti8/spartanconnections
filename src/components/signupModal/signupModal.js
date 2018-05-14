@@ -45,6 +45,7 @@ class SignupModal extends Component {
                     <Segment raised>
                             <Icon
                             name='window close'
+                            id='closeIcon'
                             style={{float:"right"}}
                             onClick={this.props.clearState}
                             size='large'/>

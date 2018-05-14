@@ -7,3 +7,9 @@
     left:50%;
     transform: translate(-50%,-50%);
 }
+#closeIcon{
+    z-index: 100;
+    position:relative;
+    left:3px;
+    top:-9px;
+}

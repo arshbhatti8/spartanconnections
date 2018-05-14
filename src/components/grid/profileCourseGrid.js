@@ -1,6 +1,7 @@
 import React from 'react';
 import CourseCard from '../cards/courseCard';
 import {Grid} from 'semantic-ui-react';
+import ProfileCourseCard from '../cards/profileCourseCard';
 let courses=[
     {name:'CMPE 280',instructor:'Ron Mak',tutor:'Avdeep Sandhu',image:'cmpe146'},
     {name:'CMPE 281',instructor:'Jerry Gao',tutor:'Harkanwaldeep Saini',image:'cmpe146'},
@@ -24,7 +25,7 @@ let courses=[
 
 ];
 
-const CourseGrid = () => {
+const CourseGrid = (props) => {
 
     return (
         <div>
@@ -34,7 +35,7 @@ const CourseGrid = () => {
                         width={1}
                         key={index}
                         style={{marginBottom:'10%',display:'inline-block',marginRight:'2%',marginLeft:'2%'}}>
-                        <CourseCard
+                        <ProfileCourseCard
                             header={courses[index].name}
                             instructor={courses[index].instructor}
                             image={courses[index].image}

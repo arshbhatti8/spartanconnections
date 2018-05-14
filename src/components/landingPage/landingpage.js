@@ -119,7 +119,7 @@ class landingPage extends Component {
         }
 
         if(this.state.loginRedirect){
-            return(<Redirect to={'/home'}/>)
+            return(<Redirect to={'/profile'}/>)
         }
 
         return (

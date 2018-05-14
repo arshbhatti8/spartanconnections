@@ -1,5 +1,5 @@
 import React from 'react';
-import {Card,Image,Button} from 'semantic-ui-react';
+import {Card,Image} from 'semantic-ui-react';
 
 
 
@@ -13,9 +13,6 @@ const CourseCard = (props) => {
                 <Card.Meta>Instructor:{props.instructor}</Card.Meta>
                 <Card.Meta>Mentor:{props.tutor}</Card.Meta>
                 <Card.Description>
-                    <Button onClick={props.enrollCourse} color='blue'>
-                        Click to enroll this course
-                    </Button>
                 </Card.Description>
             </Card.Content>
         </Card>

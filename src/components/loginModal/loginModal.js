@@ -16,7 +16,9 @@ class LoginModal extends Component {
     login =()=>{
         if(this.state.email && this.state.password){
             PostData(this.state).then((result)=>{
-                console.log("Result data:"+result.data);
+                // console.log(result.data.data.user);
+                // sessionStorage.setItem('enrolledCoursesList',result.data.data.user.enrolledCourses);
+                 sessionStorage.setItem('userID',result.data.data.user._id);
                 //clearing state to return to landing page
                 this.props.clearState();
                 this.props.setLoginRedirect();
@@ -45,6 +47,7 @@ class LoginModal extends Component {
                         <Segment raised>
                             <Icon
                                 name='window close'
+                                id='closeIcon'
                                 style={{float:"right"}}
                                 onClick={this.props.clearState}
                                 size='large'/>

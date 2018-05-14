@@ -30,7 +30,7 @@ class LexChat extends React.Component {
     }
 
     handleClick() {
-        this.setState({ visible: this.state.visible == 'open'? 'closed' : 'open' });
+        this.setState({ visible: this.state.visible === 'open'? 'closed' : 'open' });
         console.log(this.state);
     }
 

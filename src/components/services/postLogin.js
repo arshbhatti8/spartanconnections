@@ -6,6 +6,7 @@ function PostData(userData){
             .then((response)=> {
             if(response.status===200){
                 resolve(response);
+                console.log(response);
             }
                 if(response.status===401){
                     resolve(response);

@@ -21,21 +21,21 @@ let courses=[
     {name:'CMPE 281',instructor:'Jerry Gao',tutor:'Harkanwaldeep Saini',image:'cmpe146'},
     {name:'CMPE 146B',instructor:'Tony Stark',tutor:'Manpreet Saini',image:'cmpe146'},
 
-
 ];
 
-const CourseGrid = () => {
+const CourseGrid = (props) => {
 
     return (
         <div style={{display:'contents'}}>
             {
-                courses.map((course,index)=>
+                props.courses.map((course,index)=>
                 <Grid.Column key={index} style={{marginRight:'10%',marginBottom:'10%'}} width={4} >
                     <CourseCard
-                        header={courses[index].name}
-                        instructor={courses[index].instructor}
+                        header={course.name}
+                        instructor={course.instructor}
                         image={courses[index].image}
-                        tutor={courses[index].tutor}/>
+                        tutor={course.tutor}
+                        enrollCourse={()=>props.enrollCourse(course.name)}/>
                 </Grid.Column>
             )
             }
